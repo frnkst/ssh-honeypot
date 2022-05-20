@@ -1,0 +1,9 @@
+port 7777 is real ssh
+
+port forwarding:
+
+sudo iptables -t nat -A PREROUTING -p tcp -i eth0 --dport 22 -j DNAT --to-destination 127.0.0.1:2222
+sudo iptables -t nat -A POSTROUTING -j MASQUERADE
+
+
+
