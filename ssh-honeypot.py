@@ -1,5 +1,6 @@
 import socket, sys, threading
 import paramiko
+import psycopg
 
 #generate keys with 'ssh-keygen -t rsa -f server.key'
 HOST_KEY = paramiko.RSAKey(filename='server.key')
