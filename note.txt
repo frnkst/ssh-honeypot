@@ -3,14 +3,15 @@ install docker
 https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
 
 install python and pip
+apt-get install python3-pip
+
 
 change ssh port to 7777:
 /etc/ssh/sshd_config --> port
 
 restart:
 sudo service ssh restart
-or
-sudo systemctl restart ssh
+
 
 port forwarding:
 /sbin/iptables -A PREROUTING -t nat -p tcp --dport 22 -j REDIRECT --to-port 2222
