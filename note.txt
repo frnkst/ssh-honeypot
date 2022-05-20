@@ -17,6 +17,26 @@ port forwarding:
 /sbin/iptables -A PREROUTING -t nat -p tcp --dport 22 -j REDIRECT --to-port 2222
 
 
+postgres:
+apt install postgresql-client-common
+sudo apt-get install postgresql-client
+
+
+docker run --name postgres335 -p 5432:5432 -e POSTGRES_PASSWORD=45432dfdf*dfdfl -e POSTGRES_USER=honey -d postgres
+
+
+https://chartio.com/resources/tutorials/how-to-list-databases-and-tables-in-postgresql-using-psql/
+createdb honey
+
+list databases --> \l
+\c honey
+
+https://pynative.com/python-postgresql-insert-update-delete-table-data-to-perform-crud-operations/#h-python-postgresql-insert-into-database-table
+
+
+
+
+
 
 
 

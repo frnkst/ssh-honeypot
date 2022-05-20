@@ -1,6 +1,8 @@
 import socket, sys, threading
 import paramiko
-import psycopg
+import psycopg2
+import random
+
 
 #generate keys with 'ssh-keygen -t rsa -f server.key'
 HOST_KEY = paramiko.RSAKey(filename='server.key')
@@ -19,6 +21,7 @@ class SSHServerHandler (paramiko.ServerInterface):
             print("New login: " + username + ":" + password)
             logfile_handle.write(username + ":" + password + "\n")
             logfile_handle.close()
+            insert(password)
         finally:
             LOGFILE_LOCK.release()
         return paramiko.AUTH_FAILED
@@ -38,6 +41,33 @@ def handleConnection(client):
     channel = transport.accept(1)
     if not channel is None:
         channel.close()
+
+def insert(pwd):
+    try:
+        connection = psycopg2.connect(user="honey",
+                                      password="45432dfdf*dfdfl",
+                                      host="127.0.0.1",
+                                      port="5432",
+                                      database="honey")
+        cursor = connection.cursor()
+
+        postgres_insert_query = """ INSERT INTO logins (ID, NAME) VALUES (%s,%s)"""
+        record_to_insert = (random.randint(1,1000), pwd)
+        cursor.execute(postgres_insert_query, record_to_insert)
+
+        connection.commit()
+        count = cursor.rowcount
+        print(count, "Record inserted successfully into mobile table")
+
+    except (Exception, psycopg2.Error) as error:
+        print("Failed to insert record into mobile table", error)
+
+    finally:
+        # closing database connection.
+        if connection:
+            cursor.close()
+            connection.close()
+            print("PostgreSQL connection is closed")
 
 def main():
     try:
