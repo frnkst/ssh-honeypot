@@ -1,24 +1,21 @@
 #!/usr/bin/env python2.7
 import socket, sys, threading
 import paramiko
-from json import dumps
-import threading
 
-# generate keys with 'ssh-keygen -t rsa -f server.key'
+#generate keys with 'ssh-keygen -t rsa -f server.key'
 HOST_KEY = paramiko.RSAKey(filename='server.key')
 SSH_PORT = 2222
-LOGFILE = 'logins.txt'  # File to log the user:password combinations to
+LOGFILE = 'logins.txt' #File to log the user:password combinations to
 LOGFILE_LOCK = threading.Lock()
 
-
-class SSHServerHandler(paramiko.ServerInterface):
+class SSHServerHandler (paramiko.ServerInterface):
     def __init__(self):
         self.event = threading.Event()
 
     def check_auth_password(self, username, password):
         LOGFILE_LOCK.acquire()
         try:
-            logfile_handle = open(LOGFILE, "a")
+            logfile_handle = open(LOGFILE,"a")
             print("New login: " + username + ":" + password)
             logfile_handle.write(username + ":" + password + "\n")
             logfile_handle.close()
@@ -26,14 +23,13 @@ class SSHServerHandler(paramiko.ServerInterface):
             LOGFILE_LOCK.release()
         return paramiko.AUTH_FAILED
 
+
     def get_allowed_auths(self, username):
         return 'password'
-
 
 def handleConnection(client):
     transport = paramiko.Transport(client)
     transport.add_server_key(HOST_KEY)
-    transport.local_version = ''
 
     server_handler = SSHServerHandler()
 
@@ -43,7 +39,6 @@ def handleConnection(client):
     if not channel is None:
         channel.close()
 
-
 def main():
     try:
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -51,9 +46,9 @@ def main():
         server_socket.bind(('', SSH_PORT))
         server_socket.listen(100)
 
-        paramiko.util.log_to_file('paramiko.log')
+        paramiko.util.log_to_file ('paramiko.log')
 
-        while (True):
+        while(True):
             try:
                 client_socket, client_addr = server_socket.accept()
                 threading.Thread.start(handleConnection(client_socket))
@@ -65,6 +60,5 @@ def main():
         print("ERROR: Failed to create socket")
         print(e)
         sys.exit(1)
-
 
 main()
