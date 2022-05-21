@@ -22,6 +22,18 @@ apt install postgresql-client-common
 sudo apt-get install postgresql-client
 
 
+CREATE TABLE logins
+(
+    logins_key    serial primary key,
+    timestamp     DATE not null,
+    ip            VARCHAR(100) not null,
+    username      VARCHAR(100) not null,
+    password      VARCHAR(100) not null,
+    useragent    VARCHAR(100)
+);
+
+
+
 docker run --name postgres335 -p 5432:5432 -e POSTGRES_PASSWORD=45432dfdf*dfdfl -e POSTGRES_USER=honey -d postgres
 
 
