@@ -1,7 +1,7 @@
 import socket, sys, threading
 import paramiko
 import psycopg2
-import random
+from datetime import datetime
 
 
 #generate keys with 'ssh-keygen -t rsa -f server.key'
@@ -11,7 +11,8 @@ LOGFILE = 'logins.txt' #File to log the user:password combinations to
 LOGFILE_LOCK = threading.Lock()
 
 class SSHServerHandler (paramiko.ServerInterface):
-    def __init__(self):
+    def __init__(self, client_ip):
+        self.client_ip = client_ip
         self.event = threading.Event()
 
     def check_auth_password(self, username, password):
@@ -21,7 +22,7 @@ class SSHServerHandler (paramiko.ServerInterface):
             print("New login: " + username + ":" + password)
             logfile_handle.write(username + ":" + password + "\n")
             logfile_handle.close()
-            insert(password)
+            insert(self.client_ip, username, password)
         finally:
             LOGFILE_LOCK.release()
         return paramiko.AUTH_FAILED
@@ -30,11 +31,12 @@ class SSHServerHandler (paramiko.ServerInterface):
     def get_allowed_auths(self, username):
         return 'password'
 
-def handleConnection(client):
+def handleConnection(client, addr):
+    client_ip = addr[0]
     transport = paramiko.Transport(client)
     transport.add_server_key(HOST_KEY)
 
-    server_handler = SSHServerHandler()
+    server_handler = SSHServerHandler(client_ip)
 
     transport.start_server(server=server_handler)
 
@@ -42,7 +44,7 @@ def handleConnection(client):
     if not channel is None:
         channel.close()
 
-def insert(pwd):
+def insert(ip, username, password):
     try:
         connection = psycopg2.connect(user="honey",
                                       password="45432dfdf*dfdfl",
@@ -51,8 +53,8 @@ def insert(pwd):
                                       database="honey")
         cursor = connection.cursor()
 
-        postgres_insert_query = """ INSERT INTO logins (ID, NAME) VALUES (%s,%s)"""
-        record_to_insert = (random.randint(1,1000), pwd)
+        postgres_insert_query = """ INSERT INTO logins (timestamp , ip, username, password) VALUES (%s,%s,%s,%s)"""
+        record_to_insert = (datetime.now(), ip, username, password)
         cursor.execute(postgres_insert_query, record_to_insert)
 
         connection.commit()
@@ -81,7 +83,7 @@ def main():
         while(True):
             try:
                 client_socket, client_addr = server_socket.accept()
-                threading.Thread.start(handleConnection(client_socket))
+                threading.Thread.start(handleConnection(client_socket, client_addr))
             except Exception as e:
                 print("ERROR: Client handling")
                 print(e)
