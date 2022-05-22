@@ -1,4 +1,4 @@
-name: Main branch
+name: frontend build
 
 on:
   push:
@@ -15,20 +15,20 @@ jobs:
         working-directory: ./frontend
 
     steps:
-      - name: Checkout 👀
+      - name: checkout
         uses: actions/checkout@v2
 
-      - name: Install Dependencies ️‍🔧
+      - name: install
         run: npm install
 
-      - name: Build 🔨
+      - name: build
         run: npm run build
 
-      - name: Artifact Id 🪪
+      - name: artifact id
         if: github.ref == 'refs/heads/main'
         run: echo "ARTIFACT_ID=$(date +%Y-%m-%dT%H-%M)_$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-      - name: Login to Container Registry 🔑
+      - name: login to container registry
         if: github.ref == 'refs/heads/main'
         uses: docker/login-action@v1
         with:
@@ -36,7 +36,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Docker-build and Publish 💾
+      - name: docker build and publish
         if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v2
         with:
