@@ -6,4 +6,4 @@ docker run -d -p 3000:3000 ghcr.io/frnkst/honeypot-backend:$VERSION
 docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=45432dfdf*dfdfl -e POSTGRES_USER=honey postgres
 rm server.key
 ssh-keygen -q -N '' -f server.key
-nohub python3 honeypot/ssh-honeypot.py > honeypot-log.txt &
+nohup python3 honeypot/ssh-honeypot.py > honeypot-log.txt &
