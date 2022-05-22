@@ -2,3 +2,4 @@
 note.txt
 .idea
 api-server/node_modules
+npm install recharts
