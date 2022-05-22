@@ -3,4 +3,4 @@ FROM node:16
 COPY . .
 
 EXPOSE 3000
-ENTRYPOINT ["node", "server.js"]
+CMD ["node", "server.js"]
