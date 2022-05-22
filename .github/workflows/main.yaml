@@ -1,0 +1,16 @@
+name: Main branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build image
+        run: docker build -t honeypot-frontend .
