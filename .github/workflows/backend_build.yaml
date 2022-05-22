@@ -23,7 +23,7 @@ jobs:
 
       - name: artifact id
         if: github.ref == 'refs/heads/main'
-        run: echo "ARTIFACT_ID=$(date +%Y-%m-%dT%H-%M)_$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        run: echo "ARTIFACT_ID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: login to container registry
         if: github.ref == 'refs/heads/main'

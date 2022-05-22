@@ -1,7 +1,7 @@
 
 # run this: git reset --hard && git pull && chmod +x run.sh && ./run.sh
 
-ARTIFACT_ID=$(date +%Y-%m-%dT%H-%M)_$(git rev-parse --short HEAD)
+ARTIFACT_ID=$(git rev-parse --short HEAD)
 
 
 docker kill $(docker ps -q)
