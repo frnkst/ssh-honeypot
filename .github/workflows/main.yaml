@@ -7,17 +7,24 @@ on:
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout 👀
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies ️‍🔧
+        run: npm install
+
+      - name: Build 🔨
+        run: npm run build
 
       - name: Artifact Id 🪪
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/master'
         run: echo "ARTIFACT_ID=$(date +%Y-%m-%dT%H-%M)_$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: Login to Container Registry 🔑
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/master'
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
@@ -25,10 +32,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Docker-build and Publish 💾
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/master'
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./frontend/Dockerfile
+          file: ./Dockerfile
           push: true
           tags: ghcr.io/${{ github.actor }}/angular-starter:${{ env.ARTIFACT_ID }}
