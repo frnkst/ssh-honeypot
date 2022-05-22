@@ -12,5 +12,23 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: build image
-        run: docker build -t honeypot-frontend frontend/
+      - name: Artifact Id 🪪
+        if: github.ref == 'refs/heads/master'
+        run: echo "ARTIFACT_ID=$(date +%Y-%m-%dT%H-%M)_$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Login to Container Registry 🔑
+        if: github.ref == 'refs/heads/master'
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker-build and Publish 💾
+        if: github.ref == 'refs/heads/master'
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./frontend/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.actor }}/angular-starter:${{ env.ARTIFACT_ID }}
