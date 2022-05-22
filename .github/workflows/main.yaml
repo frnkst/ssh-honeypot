@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     defaults:
       run:
         working-directory: ./frontend
@@ -41,4 +43,4 @@ jobs:
           context: .
           file: ./frontend/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.actor }}/angular-starter:${{ env.ARTIFACT_ID }}
+          tags: ghcr.io/${{ github.actor }}/honeypot-frontend:${{ env.ARTIFACT_ID }}
