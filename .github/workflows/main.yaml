@@ -23,11 +23,11 @@ jobs:
         run: npm run build
 
       - name: Artifact Id 🪪
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: echo "ARTIFACT_ID=$(date +%Y-%m-%dT%H-%M)_$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: Login to Container Registry 🔑
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
@@ -35,7 +35,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Docker-build and Publish 💾
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v2
         with:
           context: .
