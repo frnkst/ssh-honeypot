@@ -53,7 +53,7 @@ export const data = {
 export function TestChart() {
 	useEffect(() => {
 		const getDatas = async () => {
-			const response = await fetch("http://0.0.0.0:40002");
+			const response = await fetch("http://172.105.78.155/:40002");
 			const data = await response.json();
 			console.log("frank:" , data);
 		}

@@ -14,6 +14,7 @@ docker run -d -p 40002:3000 ghcr.io/frnkst/honeypot-backend:"$ARTIFACT_ID"
 docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=$PGPASSWORD -e POSTGRES_USER=honeypot_user postgres
 
 echo "---------- create database and table"
+sleep 10
 psql -U honeypot_user -h localhost -c "CREATE DATABASE honeypotdb;"
 psql -U honeypot_user -h localhost -d honeypotdb -c "CREATE TABLE logins
                                      (
