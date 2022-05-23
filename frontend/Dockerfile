@@ -5,7 +5,8 @@ WORKDIR /usr/share/nginx/html
 # Remove default nginx static assets
 RUN rm -rf ./*
 # Copy static assets from builder stage
-COPY ./frontend/build .
+RUN mkdir -p /etc/nginx/html/
+COPY ./frontend/build/* /etc/nginx/html/
 
 COPY ./frontend/default.conf /etc/nginx/conf.d/default.conf
 
