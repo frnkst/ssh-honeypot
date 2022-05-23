@@ -7,8 +7,9 @@ docker kill "$(docker ps -q)"
 docker rm "$(docker ps -a -q)"
 docker run -d -p 40001:80 ghcr.io/frnkst/honeypot-frontend:"$ARTIFACT_ID"
 docker run -d -p 40002:3000 ghcr.io/frnkst/honeypot-backend:"$ARTIFACT_ID"
-docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=45432dfdf*dfdfl -e POSTGRES_USER=honeypot_user postgres
+docker run -d -p 5432:5432 -e POSTGRES_PASSWORD=1234 -e POSTGRES_USER=honeypot_user postgres
 
+export PGPASSWORD=1234
 psql honeypot_user -c "CREATE DATABASE honeypotdb;"
 psql honeypot_user -d honeypotdb -c "CREATE TABLE logins
                                      (
