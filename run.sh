@@ -22,6 +22,7 @@ psql honeypot_user -d honeypotdb -c "CREATE TABLE logins
                                      );"
 
 
+
 rm server.key
 ssh-keygen -q -N '' -f server.key
 nohup python3 honeypot/ssh-honeypot.py > honeypot-log.txt &
