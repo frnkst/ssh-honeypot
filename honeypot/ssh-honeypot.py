@@ -46,11 +46,11 @@ def handleConnection(client, addr):
 
 def insert(ip, username, password):
     try:
-        connection = psycopg2.connect(user="honey",
-                                      password="45432dfdf*dfdfl",
+        connection = psycopg2.connect(user="honeypot_user",
+                                      password="1234",
                                       host="127.0.0.1",
                                       port="5432",
-                                      database="honey")
+                                      database="honeypotdb")
         cursor = connection.cursor()
 
         postgres_insert_query = """ INSERT INTO logins (timestamp , ip, username, password) VALUES (%s,%s,%s,%s)"""
