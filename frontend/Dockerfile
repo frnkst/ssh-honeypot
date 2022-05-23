@@ -6,7 +6,7 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 # Copy static assets from builder stage
 RUN mkdir -p /etc/nginx/html/
-COPY ./frontend/build/* /etc/nginx/html/
+COPY ./frontend/build .
 
 COPY ./frontend/default.conf /etc/nginx/conf.d/default.conf
 
