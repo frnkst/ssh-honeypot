@@ -8,6 +8,7 @@ import {
 	Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import {useEffect} from "react";
 
 ChartJS.register(
 		CategoryScale,
@@ -50,5 +51,18 @@ export const data = {
 };
 
 export function TestChart() {
-	return <Bar options={options} data={data} />;
+	useEffect(() => {
+		const getDatas = async () => {
+			const response = await fetch("http://0.0.0.0:40002");
+			const data = await response.json();
+			console.log("frank:" , data);
+		}
+		getDatas()
+	});
+
+	return (<>
+		frank test:
+
+		<Bar options={options} data={data} />
+		</>);
 }
