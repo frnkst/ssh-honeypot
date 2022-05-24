@@ -1,68 +1,47 @@
-import {
-	Chart as ChartJS,
-	CategoryScale,
-	LinearScale,
-	BarElement,
-	Title,
-	Tooltip,
-	Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 
-ChartJS.register(
-		CategoryScale,
-		LinearScale,
-		BarElement,
-		Title,
-		Tooltip,
-		Legend
-);
+import { Line } from "react-chartjs-2";
+import { Chart, registerables} from 'chart.js';
 
-export const options = {
-	responsive: true,
-	plugins: {
-		legend: {
-			position: 'top' as const,
-		},
-		title: {
-			display: true,
-			text: 'Chart.js Bar Chart',
-		},
-	},
-};
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+Chart.register(...registerables);
 
-export const data = {
-	labels,
+let rawData;
+
+const data = {
+	labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
 	datasets: [
 		{
-			label: 'Dataset 1',
-			data: labels.map(() => 500),
-			backgroundColor: 'rgba(255, 99, 132, 0.5)',
+			label: "First dataset",
+			data: [33, 53, 85, 41, 44, 65],
+			fill: true,
+			backgroundColor: "rgba(75,192,192,0.2)",
+			borderColor: "rgba(75,192,192,1)"
 		},
 		{
-			label: 'Dataset 2',
-			data: labels.map(() => 500),
-			backgroundColor: 'rgba(53, 162, 235, 0.5)',
-		},
-	],
+			label: "Second dataset",
+			data: [33, 25, 35, 51, 54, 76],
+			fill: false,
+			borderColor: "#742774"
+		}
+	]
 };
 
 export function TestChart() {
+
 	useEffect(() => {
 		const getDatas = async () => {
-			const response = await fetch("http://172.105.78.155:40002/");
-			const data = await response.json();
+			// const response = await fetch("http://172.105.78.155:40002/");
+			// const data = await response.json();
+			//const rawData = dummyData
 			console.log("frank:" , data);
 		}
 		getDatas()
 	});
 
-	return (<>
-		frank test:
-
-		<Bar options={options} data={data} />
-		</>);
+	return (
+			<div className="App">
+				<Line data={data} />
+			</div>
+	);
 }
