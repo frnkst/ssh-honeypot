@@ -1,45 +1,48 @@
-import React, {useEffect} from "react";
+import React from "react";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie } from "react-chartjs-2";
+import { forIn } from "lodash";
+import countBy from "lodash/countBy";
+import { Logins } from "./App";
 
-import { Line } from "react-chartjs-2";
-import { Chart, registerables} from 'chart.js';
+ChartJS.register(ArcElement, Tooltip, Legend);
 
-
-Chart.register(...registerables);
-
-const data = {
-	labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-	datasets: [
-		{
-			label: "First dataset",
-			data: [33, 53, 85, 41, 44, 65],
-			fill: true,
-			backgroundColor: "rgba(75,192,192,0.2)",
-			borderColor: "rgba(75,192,192,1)"
-		},
-		{
-			label: "Second dataset",
-			data: [33, 25, 35, 51, 54, 76],
-			fill: false,
-			borderColor: "#742774"
-		}
-	]
+type TestChartProps = {
+  data: Logins;
 };
 
-export function TestChart() {
+export function TestChart(props: TestChartProps) {
+  const countByUsername: any = [];
+  forIn(countBy(props.data, "username"), function (value, key) {
+    countByUsername.push({ username: key, count: value });
+  });
 
-	useEffect(() => {
-		const getDatas = async () => {
-			// const response = await fetch("http://172.105.78.155:40002/");
-			// const data = await response.json();
-			//const rawData = dummyData
-			console.log("frank:" , data);
-		}
-		getDatas()
-	});
+  const data = {
+    labels: countByUsername.map((it: any) => it.username),
+    datasets: [
+      {
+        label: "# of Votes",
+        data: countByUsername.map((it: any) => it.count),
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
 
-	return (
-			<div className="App">
-				<Line data={data} />
-			</div>
-	);
+  return <Pie data={data} />;
 }

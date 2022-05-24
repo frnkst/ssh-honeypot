@@ -31,7 +31,9 @@ function App() {
 
   return (
     <>
-      <TestChart />
+      <div style={{ width: "50%" }}>
+        <TestChart data={rawData} />
+      </div>
       <div style={{ width: "50%" }}>
         <RecentAttempts data={rawData} />
       </div>
