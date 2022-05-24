@@ -6,8 +6,6 @@ import { Chart, registerables} from 'chart.js';
 
 Chart.register(...registerables);
 
-let rawData;
-
 const data = {
 	labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
 	datasets: [
