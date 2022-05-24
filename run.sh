@@ -4,18 +4,16 @@
 ARTIFACT_ID=$(git rev-parse --short HEAD)
 export PGPASSWORD=1234
 
-echo "---------- kill and remove all running docker container"
+echo "---------- kill and remove all running docker container ----------"
 docker kill $(docker ps -q)
 docker rm $(docker ps -a -q)
 docker network rm honeypot-net
-
-echo "---------- start frontend, backend and postgres"
 docker network create honeypot-net
-docker run -d -p 40001:80 --name honeypot-frontend --net honeypot-net ghcr.io/frnkst/honeypot-frontend:"$ARTIFACT_ID"
-docker run -d -p 40002:3000 --name honeypot-backend --net honeypot-net ghcr.io/frnkst/honeypot-backend:"$ARTIFACT_ID"
+
+echo "---------- start database ---------- "
 docker run -d -p 5432:5432 --name honeypot-database --net honeypot-net -e POSTGRES_PASSWORD=$PGPASSWORD -e POSTGRES_USER=honeypot_user postgres
 
-echo "---------- create database and table"
+echo "---------- create database and table ----------"
 sleep 10
 psql -U honeypot_user -h localhost -c "CREATE DATABASE honeypotdb;"
 psql -U honeypot_user -h localhost -d honeypotdb -c "CREATE TABLE logins
@@ -28,6 +26,9 @@ psql -U honeypot_user -h localhost -d honeypotdb -c "CREATE TABLE logins
                                          useragent    VARCHAR(100)
                                      );"
 
+echo "---------- start frontend and backend ----------"
+docker run -d -p 40001:80 --name honeypot-frontend --net honeypot-net ghcr.io/frnkst/honeypot-frontend:"$ARTIFACT_ID"
+docker run -d -p 40002:3000 --name honeypot-backend --net honeypot-net ghcr.io/frnkst/honeypot-backend:"$ARTIFACT_ID"
 
 echo "---------- generate new server key"
 rm server.key
