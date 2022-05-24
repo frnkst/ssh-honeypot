@@ -5,7 +5,7 @@ const pool = new Pool({
   database: "honeypotdb",
   password: "1234",
   port: 5432,
-  host: "172.105.78.155",
+  host: "honeypot-database",
 });
 
 module.exports = { pool };
