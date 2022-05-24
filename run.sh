@@ -7,6 +7,7 @@ export PGPASSWORD=1234
 echo "---------- kill and remove all running docker container"
 docker kill $(docker ps -q)
 docker rm $(docker ps -a -q)
+docker network rm honeypot-net
 
 echo "---------- start frontend, backend and postgres"
 docker network create honeypot-net
@@ -20,7 +21,7 @@ psql -U honeypot_user -h localhost -c "CREATE DATABASE honeypotdb;"
 psql -U honeypot_user -h localhost -d honeypotdb -c "CREATE TABLE logins
                                      (
                                          logins_key    serial primary key,
-                                         timestamp     DATE not null,
+                                         timestamp     TIMESTAMP not null,
                                          ip            VARCHAR(100) not null,
                                          username      VARCHAR(100) not null,
                                          password      VARCHAR(100) not null,
