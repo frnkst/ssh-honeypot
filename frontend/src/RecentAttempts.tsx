@@ -1,47 +1,34 @@
-import sortBy from "lodash/sortBy";
 import { Logins } from "./App";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-} from "@chakra-ui/react";
+import "./Recent.css";
 
 type RecentAttemptProps = {
   data: Logins;
 };
 
 export function RecentAttempts(props: RecentAttemptProps) {
-  const sortedByTimestamp = sortBy(props.data, ["timestamp"]).splice(0, 20);
-
   return (
     <>
-      <h3>Last 20 attempts</h3>
-      <TableContainer>
-        <Table variant="simple">
-          <Thead>
-            <Tr>
-              <Th>IP Address</Th>
-              <Th>Time</Th>
-              <Th>Username</Th>
-              <Th>Password</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {sortedByTimestamp.map((item, index) => (
-              <Tr>
-                <Td>{item.ip}</Td>
-                <Td>{new Date(item.timestamp).toLocaleTimeString()}</Td>
-                <Td>{item.username}</Td>
-                <Td>{item.password}</Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+      <h2>Most recent attempts</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>IP</th>
+            <th>Username</th>
+            <th>Password</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.data.map((item, index) => (
+            <tr key={index}>
+              <td>{new Date(item.timestamp).toLocaleTimeString()}</td>
+              <td>{item.ip}</td>
+              <td>{item.username}</td>
+              <td>{item.password}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 }
