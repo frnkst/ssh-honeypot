@@ -3,11 +3,9 @@ import paramiko
 import psycopg2
 from datetime import datetime
 
-
-#generate keys with 'ssh-keygen -t rsa -f server.key'
 HOST_KEY = paramiko.RSAKey(filename='server.key')
 SSH_PORT = 2222
-LOGFILE = 'logins.txt' #File to log the user:password combinations to
+LOGFILE = 'logins.txt'
 LOGFILE_LOCK = threading.Lock()
 
 class SSHServerHandler (paramiko.ServerInterface):
@@ -16,15 +14,7 @@ class SSHServerHandler (paramiko.ServerInterface):
         self.event = threading.Event()
 
     def check_auth_password(self, username, password):
-        LOGFILE_LOCK.acquire()
-        try:
-            logfile_handle = open(LOGFILE,"a")
-            print("New login: " + username + ":" + password)
-            logfile_handle.write(username + ":" + password + "\n")
-            logfile_handle.close()
-            insert(self.client_ip, username, password)
-        finally:
-            LOGFILE_LOCK.release()
+        insert(self.client_ip, username, password)
         return paramiko.AUTH_FAILED
 
 

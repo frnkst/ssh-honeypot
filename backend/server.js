@@ -30,6 +30,15 @@ app.get("/passwords", async (req, res) => {
   res.send(JSON.stringify(data.rows));
 });
 
+app.get("/attack-history", async (req, res) => {
+  const query =
+    "SELECT DATE_TRUNC('hour', timestamp), COUNT(*)\n" +
+    "FROM logins\n" +
+    "GROUP BY DATE_TRUNC('hour', timestamp) order by date_trunc desc";
+  const data = await getData(query);
+  res.send(JSON.stringify(data.rows));
+});
+
 app.get("/recent", async (req, res) => {
   const query = "select * from logins order by timestamp desc limit 50";
   const data = await getData(query);

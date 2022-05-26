@@ -4,6 +4,8 @@ import { TopPasswords } from "./Passwords";
 import { RecentAttempts } from "./RecentAttempts";
 import { UserNames } from "./UserNames";
 import { TopIPs } from "./TopIps";
+import { TestChart } from "./TestChart";
+import { AttacksHistory } from "./AttackHistory";
 
 type Login = {
   logins_key: number;
@@ -33,6 +35,13 @@ export type IP = {
   count: number;
 };
 
+type AtHistory = {
+  date_trunc: string;
+  count: number;
+};
+
+export type AttackHistoryData = AtHistory[];
+
 async function getRecentAttempts() {
   const response = await fetch("http://172.105.78.155:40002/recent");
   return await response.json();
@@ -53,6 +62,11 @@ async function getIPs() {
   return await response.json();
 }
 
+async function getAttackHistoryData() {
+  const response = await fetch("http://172.105.78.155:40002/attack-history");
+  return await response.json();
+}
+
 function App() {
   useEffect(() => {
     const getData = async () => {
@@ -60,11 +74,13 @@ function App() {
       const usernames = await getUsernames();
       const passwords = await getPasswords();
       const ips = await getIPs();
+      const attackHistoryData = await getAttackHistoryData();
 
       setUsernames(usernames);
       setRecentAttempts(recentAttempts);
       setPasswords(passwords);
       setIPs(ips);
+      setAttackHistoryData(attackHistoryData);
     };
 
     getData().catch(console.error);
@@ -74,11 +90,16 @@ function App() {
   const [usernames, setUsernames] = useState<Usernames>([]);
   const [passwords, setPasswords] = useState<Passwords>([]);
   const [ips, setIPs] = useState<IPs>([]);
+  const [attackHistoryData, setAttackHistoryData] = useState<AttackHistoryData>(
+    []
+  );
 
   return (
     <>
       <h1>SSH Honeypot</h1>
 
+      <TestChart data={passwords} />
+      <AttacksHistory data={attackHistoryData} />
       <RecentAttempts data={recentAttempts} />
       <UserNames data={usernames} />
       <TopPasswords data={passwords} />
