@@ -15,16 +15,16 @@ docker run -d -p 5432:5432 --name honeypot-database --net honeypot-net -e POSTGR
 
 echo "---------- create database and table ----------"
 sleep 10
-psql -U honeypot_user -h localhost -c "CREATE DATABASE honeypotdb;"
-psql -U honeypot_user -h localhost -d honeypotdb -c "CREATE TABLE logins
-                                     (
-                                         logins_key    serial primary key,
-                                         timestamp     TIMESTAMP not null,
-                                         ip            VARCHAR(100) not null,
-                                         username      VARCHAR(100) not null,
-                                         password      VARCHAR(100) not null,
-                                         useragent    VARCHAR(100)
-                                     );"
+#psql -U honeypot_user -h localhost -c "CREATE DATABASE honeypotdb;"
+#psql -U honeypot_user -h localhost -d honeypotdb -c "CREATE TABLE logins
+#                                     (
+#                                         logins_key    serial primary key,
+#                                         timestamp     TIMESTAMP not null,
+#                                         ip            VARCHAR(100) not null,
+#                                         username      VARCHAR(100) not null,
+#                                         password      VARCHAR(100) not null,
+#                                         useragent    VARCHAR(100)
+#                                     );"
 
 echo "---------- start frontend and backend ----------"
 docker run -d -p 40001:80 --name honeypot-frontend --net honeypot-net ghcr.io/frnkst/honeypot-frontend:"$ARTIFACT_ID"
