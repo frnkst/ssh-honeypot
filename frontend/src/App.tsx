@@ -110,20 +110,22 @@ function App() {
         <AttacksHistory data={attackHistoryData} />
       </div>
 
-      <div className="detail-stats">
-        <div className="box">
-          <h3>Top 20 IP Adresses</h3>
-          <TopIPs data={ips} />
-        </div>
+      <div className="all-stats">
+        <div className="detail-stats">
+          <div className="box">
+            <h3>Top 20 IP Adresses</h3>
+            <TopIPs data={ips} />
+          </div>
 
-        <div className="box">
-          <h3>Top 20 usernames</h3>
-          <UserNames data={usernames} />
-        </div>
+          <div className="box">
+            <h3>Top 20 usernames</h3>
+            <UserNames data={usernames} />
+          </div>
 
-        <div className="box">
-          <h3>Top 20 passwords</h3>
-          <TopPasswords data={passwords} />
+          <div className="box">
+            <h3>Top 20 passwords</h3>
+            <TopPasswords data={passwords} />
+          </div>
         </div>
       </div>
 
