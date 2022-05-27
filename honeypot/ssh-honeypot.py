@@ -37,7 +37,7 @@ def handleConnection(client, addr):
 def insert(ip, username, password):
     try:
         connection = psycopg2.connect(user="honeypot_user",
-                                      password="weeoiio459drv!",
+                                      password="weeoiio459drv",
                                       host="127.0.0.1",
                                       port="5432",
                                       database="honeypotdb")
