@@ -34,7 +34,7 @@ app.get("/attack-history", async (req, res) => {
   const query =
     "SELECT DATE_TRUNC('hour', timestamp), COUNT(*)\n" +
     "FROM logins\n" +
-    "GROUP BY DATE_TRUNC('hour', timestamp) order by date_trunc desc";
+    "GROUP BY DATE_TRUNC('hour', timestamp) order by date_trunc asc";
   const data = await getData(query);
   res.send(JSON.stringify(data.rows));
 });

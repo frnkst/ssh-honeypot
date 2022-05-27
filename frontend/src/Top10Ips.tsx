@@ -21,12 +21,9 @@ export function Top10Ips(props: Top10IpsProps) {
     countedByIp.push({ ip: key, count: value });
   });
 
-  console.log("count", countedByIp);
-
   return (
     <>
-      <h3>Top 10 attacking ips</h3>
-      <TableContainer>
+      <TableContainer width="100%">
         <Table variant="simple">
           <Thead>
             <Tr>

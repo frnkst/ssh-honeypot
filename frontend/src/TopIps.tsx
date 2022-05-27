@@ -8,8 +8,7 @@ type TopIPsProps = {
 export function TopIPs(props: TopIPsProps) {
   return (
     <>
-      <h2>Top IPs</h2>
-      <table>
+      <table width="100%">
         <thead>
           <tr>
             <th>IP</th>

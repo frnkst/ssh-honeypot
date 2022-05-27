@@ -2,7 +2,7 @@
 # run this: git reset --hard && git pull && chmod +x run.sh && ./run.sh
 
 ARTIFACT_ID=$(git rev-parse --short HEAD)
-export PGPASSWORD=1234
+export PGPASSWORD=weeoiio459drv!
 
 echo "---------- kill and remove all running docker container ----------"
 docker kill $(docker ps -q)
@@ -11,7 +11,7 @@ docker network rm honeypot-net
 docker network create honeypot-net
 
 echo "---------- start database ---------- "
-docker run -d -p 5432:5432 --name honeypot-database --net honeypot-net -e POSTGRES_PASSWORD=$PGPASSWORD -e POSTGRES_USER=honeypot_user postgres
+docker run -d -p 5432:5432 --name honeypot-database --net honeypot-net -v ./data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=$PGPASSWORD -e POSTGRES_USER=honeypot_user postgres
 
 echo "---------- create database and table ----------"
 sleep 10

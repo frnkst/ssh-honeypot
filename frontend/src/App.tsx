@@ -6,6 +6,7 @@ import { UserNames } from "./UserNames";
 import { TopIPs } from "./TopIps";
 import { TestChart } from "./TestChart";
 import { AttacksHistory } from "./AttackHistory";
+import { BasicStats } from "./BasicStats";
 
 type Login = {
   logins_key: number;
@@ -98,12 +99,35 @@ function App() {
     <>
       <h1>SSH Honeypot</h1>
 
-      <TestChart data={passwords} />
-      <AttacksHistory data={attackHistoryData} />
+      <div className="charts">
+        <div className="basic-charts">
+          <TestChart data={passwords} />
+          <div className="stats-box">
+            <BasicStats />
+          </div>
+        </div>
+
+        <AttacksHistory data={attackHistoryData} />
+      </div>
+
+      <div className="detail-stats">
+        <div className="box">
+          <h3>Top 20 IP Adresses</h3>
+          <TopIPs data={ips} />
+        </div>
+
+        <div className="box">
+          <h3>Top 20 usernames</h3>
+          <UserNames data={usernames} />
+        </div>
+
+        <div className="box">
+          <h3>Top 20 passwords</h3>
+          <TopPasswords data={passwords} />
+        </div>
+      </div>
+
       <RecentAttempts data={recentAttempts} />
-      <UserNames data={usernames} />
-      <TopPasswords data={passwords} />
-      <TopIPs data={ips} />
     </>
   );
 }

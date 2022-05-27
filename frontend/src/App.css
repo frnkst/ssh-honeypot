@@ -1,0 +1,28 @@
+.charts {
+  display: flex;
+}
+
+.basic-charts {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-stats {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.box {
+  border: 1px solid gray;
+  width: 30%;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.stats-box {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 15px;
+}
+

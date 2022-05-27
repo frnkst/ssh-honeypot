@@ -15,21 +15,49 @@ export function AttacksHistory(props: AttackHistoryProps) {
     width: "100vw",
   };
 
+  const dateList = props.data.map(function (item) {
+    return new Date(item.date_trunc).toLocaleString();
+  });
+  const valueList = props.data.map(function (item) {
+    return item.count;
+  });
+
   const option = {
-    xAxis: {
-      type: "category",
-      data: props.data.map((it) => it.date_trunc),
+    // Make gradient line here
+    visualMap: [
+      {
+        show: false,
+        type: "continuous",
+        seriesIndex: 0,
+        min: 0,
+        max: 400,
+      },
+      {
+        show: false,
+        type: "continuous",
+        seriesIndex: 1,
+        dimension: 0,
+        min: 0,
+        max: dateList.length - 1,
+      },
+    ],
+    tooltip: {
+      trigger: "axis",
     },
-    yAxis: {
-      type: "value",
-    },
+    xAxis: [
+      {
+        data: dateList,
+      },
+    ],
+    yAxis: [{}],
     series: [
       {
-        data: props.data.map((it) => it.count),
-        type: "bar",
+        type: "line",
+        showSymbol: false,
+        data: valueList,
       },
     ],
   };
 
-  return <ReactEcharts option={option} style={style} className="pie-chart" />;
+  return <ReactEcharts option={option} style={style} />;
 }

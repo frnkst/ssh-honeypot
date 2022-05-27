@@ -8,8 +8,7 @@ type UserNamesProps = {
 export function UserNames(props: UserNamesProps) {
   return (
     <>
-      <h2>Top Usernames</h2>
-      <table>
+      <table width="100%">
         <thead>
           <tr>
             <th>Username</th>
