@@ -1,12 +1,14 @@
 import * as React from "react";
 import ReactEcharts from "echarts-for-react";
-import { Passwords } from "../App";
+import { BasicStats, Passwords } from "../App";
 
-type TestChartProps = {
-  data: Passwords;
+type BasicStatsProps = {
+  data: BasicStats;
 };
 
-export function TestChart(props: TestChartProps) {
+export function TestChart(props: BasicStatsProps) {
+  const rate = (Number(props.data.count15mins[0].count) / 15).toFixed(2);
+
   //Chart style
   const style = {
     height: "30vh",
@@ -19,6 +21,8 @@ export function TestChart(props: TestChartProps) {
     },
     series: [
       {
+        min: 1,
+        max: 10,
         name: "Pressure",
         type: "gauge",
         progress: {
@@ -30,8 +34,8 @@ export function TestChart(props: TestChartProps) {
         },
         data: [
           {
-            value: 50,
-            name: "Attacks per minute",
+            value: rate,
+            name: "apm",
           },
         ],
       },

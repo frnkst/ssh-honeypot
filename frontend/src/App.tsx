@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TestChart } from "./components/TestChart";
-import { BasicStats } from "./components/BasicStats";
+import { BasicStatsView } from "./components/BasicStats";
 import { TopIPs } from "./components/TopIps";
 import { TopPasswords } from "./components/Passwords";
 import { UserNames } from "./components/UserNames";
@@ -41,10 +41,26 @@ type AtHistory = {
   count: number;
 };
 
+type Counter = {
+  count: string;
+};
+
+export type BasicStats = {
+  count15mins: Counter[];
+  count1h: Counter[];
+  count24h: Counter[];
+  countAll: Counter[];
+};
+
 export type AttackHistoryData = AtHistory[];
 
 async function getRecentAttempts() {
   const response = await fetch("http://172.105.78.155:40002/recent");
+  return await response.json();
+}
+
+async function getBasicStats() {
+  const response = await fetch("http://172.105.78.155:40002/count");
   return await response.json();
 }
 
@@ -76,12 +92,14 @@ function App() {
       const passwords = await getPasswords();
       const ips = await getIPs();
       const attackHistoryData = await getAttackHistoryData();
+      const basicStats = await getBasicStats();
 
       setUsernames(usernames);
       setRecentAttempts(recentAttempts);
       setPasswords(passwords);
       setIPs(ips);
       setAttackHistoryData(attackHistoryData);
+      setBasicStats(basicStats);
     };
 
     getData().catch(console.error);
@@ -91,6 +109,12 @@ function App() {
   const [usernames, setUsernames] = useState<Usernames>([]);
   const [passwords, setPasswords] = useState<Passwords>([]);
   const [ips, setIPs] = useState<IPs>([]);
+  const [basicStats, setBasicStats] = useState<BasicStats>({
+    countAll: [{ count: "0" }],
+    count24h: [{ count: "0" }],
+    count1h: [{ count: "0" }],
+    count15mins: [{ count: "0" }],
+  });
   const [attackHistoryData, setAttackHistoryData] = useState<AttackHistoryData>(
     []
   );
@@ -101,9 +125,14 @@ function App() {
 
       <div className="charts">
         <div className="basic-charts">
-          <TestChart data={passwords} />
+          <div className="attacks-per-minute">
+            <div>Attacks per minute</div>
+            <div>
+              <TestChart data={basicStats} />
+            </div>
+          </div>
           <div className="stats-box">
-            <BasicStats />
+            <BasicStatsView data={basicStats} />
           </div>
         </div>
 
