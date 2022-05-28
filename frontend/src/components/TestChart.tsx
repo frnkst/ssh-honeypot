@@ -1,6 +1,6 @@
 import * as React from "react";
 import ReactEcharts from "echarts-for-react";
-import { BasicStats, Passwords } from "../App";
+import { BasicStats } from "../App";
 
 type BasicStatsProps = {
   data: BasicStats;
