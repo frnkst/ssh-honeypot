@@ -1,12 +1,51 @@
 import socket, sys, threading
 import paramiko
 import psycopg2
+from psycopg2.pool import SimpleConnectionPool
 from datetime import datetime
+from contextlib import contextmanager
+import requests
 
 HOST_KEY = paramiko.RSAKey(filename='server.key')
 SSH_PORT = 2222
 LOGFILE = 'logins.txt'
 LOGFILE_LOCK = threading.Lock()
+
+db = SimpleConnectionPool(1, 10,host='127.0.0.1',database='honeypotdb',user='honeypot_user',password='weeoiio459drv',port=5432)
+
+@contextmanager
+def get_connection():
+    con = db.getconn()
+    try:
+        yield con
+    finally:
+        db.putconn(con)
+
+def get_ip_info(ip):
+    response = requests.get("http://ip-api.com/json/" + ip)
+    response.raise_for_status()
+
+    data = response.json()
+    print(data)
+    print(data['city'])
+    print(data['isp'])
+
+
+def write_to_db(ip, username, password):
+    get_ip_info(ip)
+
+    with get_connection() as conn:
+        try:
+            cursor = conn.cursor()
+
+            postgres_insert_query = """INSERT INTO logins (timestamp , ip, username, password) VALUES (%s,%s,%s,%s)"""
+            record_to_insert = (datetime.now(), ip, username, password)
+            cursor.execute(postgres_insert_query, record_to_insert)
+            cursor.close()
+            conn.commit()
+        except Exception as e:
+            print("someting went wrong", e)
+            conn.rollback()
 
 class SSHServerHandler (paramiko.ServerInterface):
     def __init__(self, client_ip):
@@ -14,7 +53,7 @@ class SSHServerHandler (paramiko.ServerInterface):
         self.event = threading.Event()
 
     def check_auth_password(self, username, password):
-        insert(self.client_ip, username, password)
+        write_to_db(self.client_ip, username, password)
         return paramiko.AUTH_FAILED
 
 
@@ -34,32 +73,6 @@ def handleConnection(client, addr):
     if not channel is None:
         channel.close()
 
-def insert(ip, username, password):
-    try:
-        connection = psycopg2.connect(user="honeypot_user",
-                                      password="weeoiio459drv",
-                                      host="127.0.0.1",
-                                      port="5432",
-                                      database="honeypotdb")
-        cursor = connection.cursor()
-
-        postgres_insert_query = """ INSERT INTO logins (timestamp , ip, username, password) VALUES (%s,%s,%s,%s)"""
-        record_to_insert = (datetime.now(), ip, username, password)
-        cursor.execute(postgres_insert_query, record_to_insert)
-
-        connection.commit()
-        count = cursor.rowcount
-        print(count, "Record inserted successfully into mobile table")
-
-    except (Exception, psycopg2.Error) as error:
-        print("Failed to insert record into mobile table", error)
-
-    finally:
-        # closing database connection.
-        if connection:
-            cursor.close()
-            connection.close()
-            print("PostgreSQL connection is closed")
 
 def main():
     try:
