@@ -1,4 +1,4 @@
-import { Logins } from "./App";
+import { Logins } from "../App";
 import "./Recent.css";
 
 type RecentAttemptProps = {

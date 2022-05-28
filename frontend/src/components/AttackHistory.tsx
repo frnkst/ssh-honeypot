@@ -1,6 +1,6 @@
 import * as React from "react";
 import ReactEcharts from "echarts-for-react";
-import { AttackHistoryData } from "./App";
+import { AttackHistoryData } from "../App";
 
 type AttackHistoryProps = {
   data: AttackHistoryData;

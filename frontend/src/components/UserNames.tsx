@@ -1,4 +1,4 @@
-import { Usernames } from "./App";
+import { Usernames } from "../App";
 import "./Recent.css";
 
 type UserNamesProps = {

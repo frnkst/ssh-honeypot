@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { TestChart } from "./components/TestChart";
+import { BasicStats } from "./components/BasicStats";
+import { TopIPs } from "./components/TopIps";
+import { TopPasswords } from "./components/Passwords";
+import { UserNames } from "./components/UserNames";
+import { AttacksHistory } from "./components/AttackHistory";
+import { RecentAttempts } from "./components/RecentAttempts";
 import "./App.css";
-import { TopPasswords } from "./Passwords";
-import { RecentAttempts } from "./RecentAttempts";
-import { UserNames } from "./UserNames";
-import { TopIPs } from "./TopIps";
-import { TestChart } from "./TestChart";
-import { AttacksHistory } from "./AttackHistory";
-import { BasicStats } from "./BasicStats";
 
 type Login = {
   logins_key: number;

@@ -1,4 +1,4 @@
-import { IPs } from "./App";
+import { IPs } from "../App";
 import "./Recent.css";
 
 type TopIPsProps = {

@@ -1,5 +1,5 @@
-import { Passwords } from "./App";
 import "./Recent.css";
+import { Passwords } from "../App";
 
 type PasswordsProps = {
   data: Passwords;

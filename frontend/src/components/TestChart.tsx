@@ -1,6 +1,6 @@
 import * as React from "react";
 import ReactEcharts from "echarts-for-react";
-import { Passwords } from "./App";
+import { Passwords } from "../App";
 
 type TestChartProps = {
   data: Passwords;
