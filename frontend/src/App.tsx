@@ -102,9 +102,9 @@ function App() {
       <div className="charts">
         <div className="basic-charts">
           <TestChart data={passwords} />
-          {/*<div className="stats-box">*/}
-          {/*  <BasicStats />*/}
-          {/*</div>*/}
+          <div className="stats-box">
+            <BasicStats />
+          </div>
         </div>
 
         <AttacksHistory data={attackHistoryData} />
