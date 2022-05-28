@@ -15,15 +15,11 @@
 
 .box {
   border: 1px solid gray;
-  border-radius: 10px;
-  padding: 10px;
-  justify-content: center;
-  align-items: center;
-}
-
-.stats-box {
-  border: 1px solid gray;
   border-radius: 5px;
   padding: 15px;
 }
 
+.recent-attempts {
+  margin-top: 20px;
+  display: grid;
+}

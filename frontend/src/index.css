@@ -1,5 +1,6 @@
 body {
-  background-color: #100C2A;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 51%, rgba(40,104,117,1) 100%);
   color: white;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-family: 'Poppins', sans-serif;

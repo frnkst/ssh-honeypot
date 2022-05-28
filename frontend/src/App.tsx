@@ -113,23 +113,25 @@ function App() {
       <div className="all-stats">
         <div className="detail-stats">
           <div className="box">
-            <h3>Top 20 IP Adresses</h3>
+            <h2>Top 20 IP Adresses</h2>
             <TopIPs data={ips} />
           </div>
 
           <div className="box">
-            <h3>Top 20 usernames</h3>
+            <h2>Top 20 usernames</h2>
             <UserNames data={usernames} />
           </div>
 
           <div className="box">
-            <h3>Top 20 passwords</h3>
+            <h2>Top 20 passwords</h2>
             <TopPasswords data={passwords} />
           </div>
         </div>
       </div>
 
-      <RecentAttempts data={recentAttempts} />
+      <div className="recent-attempts box">
+        <RecentAttempts data={recentAttempts} />
+      </div>
     </>
   );
 }
