@@ -23,6 +23,32 @@ app.get("/usernames", async (req, res) => {
   res.send(JSON.stringify(data.rows));
 });
 
+app.get("/count", async (req, res) => {
+  const query15mins =
+    "select count(*) from logins where timestamp > now() - interval '15 minutes'";
+  const count15mins = await getData(query15mins).rows;
+
+  const query1h =
+    "select count(*) from logins where timestamp > now() - interval '1 hour'";
+  const count1h = await getData(query1h).rows;
+
+  const query24h =
+    "select count(*) from logins where timestamp > now() - interval '24 hour'";
+  const count24h = await getData(query24h).rows;
+
+  const beginning = "select count(*) from logins";
+  const countAll = await getData(beginning).rows;
+
+  res.send(
+    JSON.stringify({
+      count15mins,
+      count1h,
+      count24h,
+      countAll,
+    })
+  );
+});
+
 app.get("/passwords", async (req, res) => {
   const query =
     "SELECT password, count(*) as count FROM logins group by password order by count desc limit 20";
