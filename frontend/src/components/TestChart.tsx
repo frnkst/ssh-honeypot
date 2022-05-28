@@ -10,10 +10,6 @@ export function TestChart(props: BasicStatsProps) {
   const rate = (Number(props.data.count15mins[0].count) / 15).toFixed(2);
 
   //Chart style
-  const style = {
-    height: "30vh",
-    width: "30vw",
-  };
 
   const option = {
     tooltip: {
@@ -22,7 +18,7 @@ export function TestChart(props: BasicStatsProps) {
     series: [
       {
         min: 1,
-        max: 10,
+        max: 20,
         name: "Pressure",
         type: "gauge",
         progress: {
@@ -41,5 +37,5 @@ export function TestChart(props: BasicStatsProps) {
       },
     ],
   };
-  return <ReactEcharts option={option} style={style} className="pie-chart" />;
+  return <ReactEcharts option={option} className="pie-chart" />;
 }

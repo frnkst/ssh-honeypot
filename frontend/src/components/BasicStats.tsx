@@ -7,22 +7,26 @@ type BasicStatsProps = {
 export function BasicStatsView(props: BasicStatsProps) {
   return (
     <>
-      <div>
-        <span>Last 15 minutes</span>
-        <span>{props.data.count15mins[0].count}</span>
-      </div>
-      <div>
-        <span>Last 1 hour</span>
-        <span>{props.data.count1h[0].count}</span>
-      </div>
-      <div>
-        <span>Last 24 hour</span>
-        <span>{props.data.count24h[0].count}</span>
-      </div>
-      <div>
-        <span>Since beginning</span>
-        <span>{props.data.countAll[0].count}</span>
-      </div>
+      <table width="100%">
+        <tbody>
+          <tr>
+            <td>Last 15 minutes</td>
+            <td>{props.data.count15mins[0].count}</td>
+          </tr>
+          <tr>
+            <td>Last 1 hour</td>
+            <td>{props.data.count1h[0].count}</td>
+          </tr>
+          <tr>
+            <td>Last 24 hour</td>
+            <td>{props.data.count24h[0].count}</td>
+          </tr>
+          <tr>
+            <td>Since beginning</td>
+            <td>{props.data.countAll[0].count}</td>
+          </tr>
+        </tbody>
+      </table>
     </>
   );
 }

@@ -9,12 +9,6 @@ type AttackHistoryProps = {
 export function AttacksHistory(props: AttackHistoryProps) {
   //const dataNames = props.data.map((i) => i.password);
 
-  //Chart style
-  const style = {
-    height: "30vh",
-    width: "100vw",
-  };
-
   const dateList = props.data.map(function (item) {
     return new Date(item.date_trunc).toLocaleString();
   });
@@ -59,5 +53,5 @@ export function AttacksHistory(props: AttackHistoryProps) {
     ],
   };
 
-  return <ReactEcharts option={option} style={style} />;
+  return <ReactEcharts option={option} />;
 }

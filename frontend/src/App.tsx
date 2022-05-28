@@ -124,19 +124,21 @@ function App() {
       <h1>SSH Honeypot</h1>
 
       <div className="charts">
-        <div className="basic-charts">
-          <div className="attacks-per-minute">
+        <div>
+          <div>
             <div>Attacks per minute</div>
-            <div>
-              <TestChart data={basicStats} />
-            </div>
-          </div>
-          <div className="stats-box">
-            <BasicStatsView data={basicStats} />
+            <TestChart data={basicStats} />
           </div>
         </div>
+        <div>
+          <div>History</div>
+          <AttacksHistory data={attackHistoryData} />
+        </div>
+      </div>
 
-        <AttacksHistory data={attackHistoryData} />
+      <div className="box">
+        <h2>Summary</h2>
+        <BasicStatsView data={basicStats} />
       </div>
 
       <div className="all-stats">
