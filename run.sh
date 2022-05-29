@@ -26,7 +26,7 @@ psql -U honeypot_user -h localhost -d honeypotdb -c "CREATE TABLE logins
                                          useragent     VARCHAR(100),
                                          city          VARCHAR(100),
                                          country       VARCHAR(100),
-                                         isp           VARCHAR(100),
+                                         isp           VARCHAR(100)
                                      );"
 
 echo "---------- start frontend and backend ----------"
