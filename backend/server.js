@@ -73,7 +73,7 @@ app.get("/recent", async (req, res) => {
 
 app.get("/ip", async (req, res) => {
   const query =
-    "select ip, count(*) from logins as count group by ip order by count desc limit 20";
+    "select ip, count(*), city, country from logins as count group by ip, city, country order by count desc limit 20";
   const data = await getData(query);
   res.send(JSON.stringify(data.rows));
 });

@@ -33,6 +33,8 @@ export type Password = {
 export type IPs = IP[];
 export type IP = {
   ip: string;
+  city: string;
+  country: string;
   count: number;
 };
 
