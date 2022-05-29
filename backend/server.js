@@ -10,6 +10,7 @@ app.use(
 );
 const port = 3000;
 
+
 app.get("/all", async (req, res) => {
   const query = "SELECT * FROM logins";
   const data = await getData(query);
