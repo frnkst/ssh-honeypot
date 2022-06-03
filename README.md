@@ -1,5 +1,16 @@
 # SSH Honeypot with realtime dashboard
 
+## Features
+
+- Current attack rate
+- Graph with number of recent attacks
+- Top 20 IP addresses with count
+- Top 20 usernames with count
+- Top 20 passwords with count
+- 20 most recent attacks with ip, username and password
+
+![dashboard](dashboard.png "Dashboard")
+
 ## Quick start
 
 - Run `git clone https://github.com/frnkst/ssh-honeypot.git`
