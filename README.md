@@ -20,7 +20,7 @@
 
 ## Get started on a new server
 
-- Install docker: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+- Install docker: https://docs.docker.com/engine/install/debian/
 - Install python and pip `apt-get install python3-pip`
 - Change real ssh port. Edit /etc/ssh/sshd_config and change port to 7777 for example
 - Restart the ssh service: sudo service ssh restart
