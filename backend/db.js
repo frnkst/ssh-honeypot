@@ -1,11 +1,11 @@
 const { Pool } = require("pg");
 
 const pool = new Pool({
-  user: "honeypot_user",
-  database: "honeypotdb",
-  password: "weeoiio459drv",
-  port: 5432,
-  host: "localhost",
+  user: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASWORD,
+  port: process.env.DB_PORT,
+  host: process.env.DB_HOST,
 });
 
 module.exports = { pool };
