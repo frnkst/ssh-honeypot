@@ -1,5 +1,5 @@
-CREATE DATABASE honeypotdb;
-
+CREATE DATABASE honeypot;
+\c honeypot
 CREATE TABLE logins
 (
     logins_key    serial primary key,

@@ -21,4 +21,4 @@ apt-get -y install python3-pip python3 postgresql-client-common postgresql-clien
 /sbin/iptables -A PREROUTING -t nat -p tcp --dport 22 -j REDIRECT --to-port 2222
 
 curl -O https://raw.githubusercontent.com/frnkst/ssh-honeypot/main/docker-compose.yaml
-docker-compose up -d
+docker-compose down --volumes  && docker-compose up -d

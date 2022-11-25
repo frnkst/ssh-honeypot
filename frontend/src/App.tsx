@@ -57,27 +57,27 @@ export type BasicStats = {
 export type AttackHistoryData = AtHistory[];
 
 async function getRecentAttempts() {
-  const response = await fetch("http://139.144.66.64:40002/recent");
+  const response = await fetch(`http://${window.location.hostname}:3000/recent`);
   return await response.json();
 }
 
 async function getBasicStats() {
-  const response = await fetch("http://139.144.66.64:40002/count");
+  const response = await fetch(`http://${window.location.hostname}:3000/count`);
   return await response.json();
 }
 
 async function getUsernames() {
-  const response = await fetch("http://139.144.66.64:40002/usernames");
+  const response = await fetch(`http://${window.location.hostname}:3000/usernames`);
   return await response.json();
 }
 
 async function getPasswords() {
-  const response = await fetch("http://139.144.66.64:40002/passwords");
+  const response = await fetch(`http://${window.location.hostname}:3000/passwords`);
   return await response.json();
 }
 
 async function getIPs() {
-  const response = await fetch("http://139.144.66.64:40002/ip");
+  const response = await fetch(`http://${window.location.hostname}:3000/ip`);
   return await response.json();
 }
 

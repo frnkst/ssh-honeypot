@@ -9,11 +9,10 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - db:/var/lib/postgresql/data
-      - ./db/init.sql:/docker-entrypoint-initdb.d/create_database_and_table.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
   api:
     container_name: honeypot-backend
-    image: ghcr.io/frnkst/honeypot-backend:59950c0
+    image: ghcr.io/frnkst/honeypot-backend:latest
     depends_on:
       - db
     ports:
@@ -31,7 +30,9 @@ services:
       - './:/src'
   ui:
     container_name: honeypot-frontend
-    image: ghcr.io/frnkst/honeypot-frontend:59950c0
+    image: ghcr.io/frnkst/honeypot-frontend:latest
+    ports:
+      - 8000:80
 volumes:
   db:
     driver: local

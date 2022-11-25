@@ -10,7 +10,7 @@ RUN apt-get -y install wget ca-certificates
 RUN apt-get -y install postgresql postgresql-contrib
 
 COPY . .
-COPY create_database_and_table.sql /docker-entrypoint-initdb.d/
+COPY init.sql /docker-entrypoint-initdb.d/
 # Install and run frontend
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
