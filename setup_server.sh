@@ -20,6 +20,11 @@ apt-get -y install python3-pip python3 postgresql-client-common postgresql-clien
 # change port
 /sbin/iptables -A PREROUTING -t nat -p tcp --dport 22 -j REDIRECT --to-port 2222
 
+# clean old docker images
+docker image prune
+docker rmi $(docker images -a -q)
+docker rm $(docker ps --filter=status=exited --filter=status=created -q)
+
 curl -O https://raw.githubusercontent.com/frnkst/ssh-honeypot/main/docker-compose.yaml
 docker-compose down --volumes  && docker-compose up -d
 

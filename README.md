@@ -11,6 +11,9 @@
 
 ![dashboard](dashboard.png "Dashboard")
 
+## One command quick start
+`sudo curl https://raw.githubusercontent.com/frnkst/ssh-honeypot/main/setup_server.sh | bash`
+
 ## Quick start
 
 - Run `git clone https://github.com/frnkst/ssh-honeypot.git`
