@@ -29,6 +29,9 @@ services:
       - db
     volumes:
       - './:/src'
+  ui:
+    container_name: honeypot-frontend
+    image: ghcr.io/frnkst/honeypot-frontend
 volumes:
   db:
     driver: local
