@@ -82,7 +82,7 @@ async function getIPs() {
 }
 
 async function getAttackHistoryData() {
-  const response = await fetch("http://139.144.66.64:40002/attack-history");
+  const response = await fetch(`http://${window.location.hostname}:3000/attack-history`);
   return await response.json();
 }
 
