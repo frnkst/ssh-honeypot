@@ -80,6 +80,8 @@ app.get("/ip", async (req, res) => {
 });
 
 app.listen(port, () => {
+  console.log("all env: ", process.env)
+
   console.log(`Example app listening on port ${port}`);
 });
 
