@@ -1,2 +1,3 @@
 paramiko
-psycopg
+psycopg2-binary
+requests
