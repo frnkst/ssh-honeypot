@@ -22,3 +22,6 @@ apt-get -y install python3-pip python3 postgresql-client-common postgresql-clien
 
 curl -O https://raw.githubusercontent.com/frnkst/ssh-honeypot/main/docker-compose.yaml
 docker-compose down --volumes  && docker-compose up -d
+
+cd honeypot
+python3 ssh-honeypot.py
