@@ -128,8 +128,7 @@ function App() {
       <div className="charts">
         <div>
           <div>
-            <div>Attacks per minute</div>
-            <TestChart data={basicStats} />
+            <div>Attacks per minute</div>            <TestChart data={basicStats} />
           </div>
         </div>
         <div>
