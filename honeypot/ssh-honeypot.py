@@ -12,7 +12,7 @@ LOGFILE = 'logins.txt'
 LOGFILE_LOCK = threading.Lock()
 
 db = SimpleConnectionPool(1, 10, host='127.0.0.1', database='honeypotdb',
-                          user='honeypot_user', password='weeoiio459drv',
+                          user='docker', password='world',
                           port=5432)
 iplist = {}
 
