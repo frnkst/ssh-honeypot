@@ -43,4 +43,4 @@ jobs:
           context: .
           file: ./frontend/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.actor }}/honeypot-frontend:${{ env.ARTIFACT_ID }}
+          tags: ghcr.io/${{ github.actor }}/honeypot-frontend:latest

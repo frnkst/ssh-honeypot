@@ -12,7 +12,7 @@ services:
       - db:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/create_database_and_table.sql
   api:
-    container_name: honeypot-backend
+    container_name: honeypot-backend:latest
     image: ghcr.io/frnkst/honeypot-backend
     depends_on:
       - db

@@ -40,4 +40,4 @@ jobs:
           context: .
           file: ./backend/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.actor }}/honeypot-backend:${{ env.ARTIFACT_ID }}
+          tags: ghcr.io/${{ github.actor }}/honeypot-backend:latest
