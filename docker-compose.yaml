@@ -13,7 +13,7 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/create_database_and_table.sql
   api:
     container_name: honeypot-backend
-    image: ghcr.io/frnkst/honeypot-backend:7750ae5
+    image: ghcr.io/frnkst/honeypot-backend
     depends_on:
       - db
     ports:
