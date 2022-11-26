@@ -9,7 +9,7 @@
 - Top 20 passwords with count
 - 20 most recent attacks with ip, username and password
 
-![dashboard](dashboard.png "Dashboard")
+![dashboard](docs/dashboard.png "Dashboard")
 
 ## One command quick start
 `sudo curl https://raw.githubusercontent.com/frnkst/ssh-honeypot/main/setup_server.sh | bash`
@@ -36,7 +36,7 @@ sudo apt-get install postgresql-client
 
 ## Architecture
 
-![Alt text](architecture_diagram.png?raw=true "Architecture")
+![Alt text](docs/architecture_diagram.png?raw=true "Architecture")
 
 
 ## Useful links
