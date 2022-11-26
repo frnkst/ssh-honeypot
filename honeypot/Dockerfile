@@ -2,8 +2,8 @@ FROM python:3
 
 WORKDIR /usr/src/app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+COPY abc.txt ./
+RUN pip install --no-cache-dir -r abc.txt
 
 COPY . .
 RUN ssh-keygen -q -N '' -f server.key
