@@ -23,7 +23,6 @@ RUN node backend/server.js &
 # Install honeypot
 WORKDIR /honeypot
 RUN pip3 install -r requirements.txt
-RUN ssh-keygen -q -N '' -f server.key
 # RUN python3 ssh-honeypot.py
 
 

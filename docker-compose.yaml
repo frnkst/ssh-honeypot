@@ -18,12 +18,11 @@ services:
     ports:
       - 3000:3000
     environment:
-      NODE_ENV: production
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_NAME: honeypot
+      - DB_PASSWORD
+      - DB_USER
+      - DB_NAME
+      - DB_HOST
+      - DB_PORT
     links:
       - db
     volumes:
@@ -33,6 +32,17 @@ services:
     image: ghcr.io/frnkst/honeypot-frontend:latest
     ports:
       - 8000:80
+  ssh-honeypot:
+    container_name: ssh-honeypot
+    image: ghcr.io/frnkst/ssh-honeypot:latest
+    ports:
+      - 22:2222
+    environment:
+      - DB_PASSWORD
+      - DB_USER
+      - DB_NAME
+      - DB_HOST
+      - DB_PORT
 volumes:
   db:
     driver: local

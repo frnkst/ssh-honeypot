@@ -27,6 +27,3 @@ docker rm $(docker ps --filter=status=exited --filter=status=created -q)
 
 curl -O https://raw.githubusercontent.com/frnkst/ssh-honeypot/main/docker-compose.yaml
 docker-compose down --volumes  && docker-compose up -d
-
-cd honeypot
-python3 ssh-honeypot.py
