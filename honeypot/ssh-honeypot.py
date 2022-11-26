@@ -18,6 +18,7 @@ DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_PORT = os.getenv('DB_PORT')
 DB_HOST = os.getenv('DB_HOST')
 
+
 db = SimpleConnectionPool(1, 10, host=DB_HOST, database=DB_NAME,
                           user=DB_USER, password=DB_PASSWORD,
                           port=DB_PORT)
