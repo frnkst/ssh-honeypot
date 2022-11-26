@@ -1,8 +1,12 @@
 FROM python:3
 
+WORKDIR /usr/src/app
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
-RUN pip3 install -r requirements.txt
 RUN ssh-keygen -q -N '' -f server.key
 
-ENTRYPOINT ["python3", "./ssh-honeypot.py"]
+ENTRYPOINT ["python", "./ssh-honeypot.py"]
 
