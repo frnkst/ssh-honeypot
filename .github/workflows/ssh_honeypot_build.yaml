@@ -12,7 +12,7 @@ jobs:
       packages: write
     defaults:
       run:
-        working-directory: ./ssh-honeypot
+        working-directory: ./honeypot
 
     steps:
       - name: checkout

@@ -1,10 +1,11 @@
 import socket, sys, threading
 import paramiko
-import psycopg2
 from psycopg2.pool import SimpleConnectionPool
 from datetime import datetime
 from contextlib import contextmanager
 import requests
+import os
+
 
 HOST_KEY = paramiko.RSAKey(filename='server.key')
 SSH_PORT = 2222
