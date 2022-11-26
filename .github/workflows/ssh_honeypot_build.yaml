@@ -33,4 +33,4 @@ jobs:
           context: .
           file: ./backend/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.actor }}/honeypot-backend:latest
+          tags: ghcr.io/${{ github.actor }}/ssh-honeypot:latest
