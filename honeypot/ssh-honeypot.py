@@ -46,16 +46,18 @@ def get_ip_info(ip):
                     'country': data['country'],
                     'isp': data['isp']
                 }
+        else:
+            iplist[ip] = {
+                'city': 'unknown',
+                'country': 'unknown',
+                'isp': 'unknown'
+            }
 
     return iplist[ip]
 
 
 def write_to_db(ip, username, password):
-    ip_info = {
-        'city': 'city',
-        'country': 'country',
-        'isp': 'isp'
-    }
+    ip_info = get_ip_info(ip)
 
     with get_connection() as conn:
         try:
