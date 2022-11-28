@@ -40,7 +40,7 @@ def get_ip_info(ip):
         response.raise_for_status()
         data = response.json()
 
-        if data['status'] is not 'fail':
+        if data['status'] != 'fail':
             iplist[ip] = {
                     'city': data['city'],
                     'country': data['country'],
