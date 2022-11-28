@@ -13,38 +13,24 @@ services:
   api:
     container_name: honeypot-backend
     image: ghcr.io/frnkst/honeypot-backend:latest
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
     depends_on:
       - db
-    ports:
-      - 3000:3000
-    environment:
-      - DB_PASSWORD
-      - DB_USER
-      - DB_NAME
-      - DB_HOST
-      - DB_PORT
-    links:
-      - db
-    volumes:
-      - './:/src'
   ui:
     container_name: honeypot-frontend
     image: ghcr.io/frnkst/honeypot-frontend:latest
     ports:
-      - 8000:80
+      - '8000:80'
   ssh-honeypot:
     container_name: ssh-honeypot
     image: ghcr.io/frnkst/ssh-honeypot:latest
+    restart: always
     ports:
-      - 22:2222
-    environment:
-      - DB_PASSWORD
-      - DB_USER
-      - DB_NAME
-      - DB_HOST
-      - DB_PORT
-    links:
+      - '2222:2222'
+    env_file:
+      - .env
+    depends_on:
       - db
-volumes:
-  db:
-    driver: local
