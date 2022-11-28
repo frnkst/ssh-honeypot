@@ -8,5 +8,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY ./honeypot .
 RUN ssh-keygen -q -N '' -f server.key
 RUN chmod +x ./start-honeypot.sh
-ENTRYPOINT ["./start-honeypot.sh"]
+ENTRYPOINT ["sh", "./start-honeypot.sh"]
 
