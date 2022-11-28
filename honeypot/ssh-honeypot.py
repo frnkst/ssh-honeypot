@@ -40,6 +40,8 @@ def get_ip_info(ip):
         response.raise_for_status()
         data = response.json()
 
+        print("frank: ip " + ip)
+
         if data is not None:
             iplist[ip] = {
                     'city': data['city'],
