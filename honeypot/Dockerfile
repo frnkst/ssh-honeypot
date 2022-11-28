@@ -7,5 +7,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./honeypot .
 RUN ssh-keygen -q -N '' -f server.key
-ENTRYPOINT ["python", "./ssh-honeypot.py", " > ", " frank.log"]
+ENTRYPOINT ["./start-honeypot.sh"]
 
