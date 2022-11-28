@@ -40,11 +40,12 @@ def get_ip_info(ip):
         response.raise_for_status()
         data = response.json()
 
-        iplist[ip] = {
-                'city': data['city'],
-                'country': data['country'],
-                'isp': data['isp']
-            }
+        if data is not None:
+            iplist[ip] = {
+                    'city': data['city'],
+                    'country': data['country'],
+                    'isp': data['isp']
+                }
 
     return iplist[ip]
 
