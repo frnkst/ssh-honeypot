@@ -40,9 +40,7 @@ def get_ip_info(ip):
         response.raise_for_status()
         data = response.json()
 
-        print("frank: ip " + ip)
-
-        if data is not None:
+        if data['status'] is not 'fail':
             iplist[ip] = {
                     'city': data['city'],
                     'country': data['country'],
@@ -53,7 +51,11 @@ def get_ip_info(ip):
 
 
 def write_to_db(ip, username, password):
-    ip_info = get_ip_info(ip)
+    ip_info = {
+        'city': 'city',
+        'country': 'country',
+        'isp': 'isp'
+    }
 
     with get_connection() as conn:
         try:
