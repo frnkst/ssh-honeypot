@@ -3,18 +3,16 @@ services:
   db:
     image: postgres:14.1-alpine
     restart: always
+    network_mode: host
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5432:5432'
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
   api:
     container_name: honeypot-backend
     image: ghcr.io/frnkst/honeypot-backend:latest
-    ports:
-      - '3000:3000'
+    network_mode: host
     env_file:
       - .env
     depends_on:
@@ -22,14 +20,12 @@ services:
   ui:
     container_name: honeypot-frontend
     image: ghcr.io/frnkst/honeypot-frontend:latest
-    ports:
-      - '8000:80'
+    network_mode: host
   ssh-honeypot:
     container_name: ssh-honeypot
     image: ghcr.io/frnkst/ssh-honeypot:latest
+    network_mode: host
     restart: always
-    ports:
-      - '2222:2222'
     env_file:
       - .env
     depends_on:
