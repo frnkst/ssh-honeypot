@@ -17,4 +17,5 @@ apt-get install -y docker-ce docker-ce-cli docker-compose containerd.io docker-c
 /sbin/iptables -A PREROUTING -t nat -p tcp --dport 22 -j REDIRECT --to-port 2222
 
 curl -O -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/frnkst/ssh-honeypot/main/docker-compose.yaml
+curl -O -H 'Cache-Control: no-cache, no-store' https://raw.githubusercontent.com/frnkst/ssh-honeypot/main/.env
 docker-compose down --volumes  && docker-compose up -d
