@@ -1,4 +1,3 @@
-
 # install docker (https://docs.docker.com/engine/install/debian/)
 apt-get update
 sudo apt-get install \
@@ -14,16 +13,8 @@ echo \
 apt-get update
 apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
-# install all the software needed
-apt-get -y install python3-pip python3 postgresql-client-common postgresql-client
-
-# change port
+# redirect port
 /sbin/iptables -A PREROUTING -t nat -p tcp --dport 22 -j REDIRECT --to-port 2222
-
-# clean old docker images
-docker image prune
-docker rmi $(docker images -a -q)
-docker rm $(docker ps --filter=status=exited --filter=status=created -q)
 
 curl -O https://raw.githubusercontent.com/frnkst/ssh-honeypot/main/docker-compose.yaml
 docker-compose down --volumes  && docker-compose up -d
